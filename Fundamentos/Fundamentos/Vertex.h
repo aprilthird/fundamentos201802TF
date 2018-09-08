@@ -28,10 +28,25 @@ struct ColorRGBA
 	}
 };
 
+struct UV {
+	float u;
+	float v;
+	void set(float _u, float _v) {
+		u = _u;
+		v = _u;
+	}
+
+};
+
 struct Vertex
 {
 	Position position;
 	ColorRGBA colorRGBA;
+	UV uv;
+
+	void setUV(float u,float v) {
+		uv.set(u, v);
+	}
 
 	void setPosition(float x, float y) {
 		position.set(x, y);
