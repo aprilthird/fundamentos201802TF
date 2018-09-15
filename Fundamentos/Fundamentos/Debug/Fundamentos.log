@@ -1,8 +1,0 @@
-﻿  ImageLoader.cpp
-c:\users\pcsilval\documents\fundamentos-teoria-de-juegos201802\fundamentos\fundamentos\imageloader.h(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\pcsilval\documents\fundamentos-teoria-de-juegos201802\fundamentos\fundamentos\iomanager.h(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\pcsilval\documents\fundamentos-teoria-de-juegos201802\fundamentos\fundamentos\iomanager.h(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\pcsilval\documents\fundamentos-teoria-de-juegos201802\fundamentos\fundamentos\imageloader.cpp(39): warning C4244: '=': conversion from 'unsigned long' to 'float', possible loss of data
-c:\users\pcsilval\documents\fundamentos-teoria-de-juegos201802\fundamentos\fundamentos\imageloader.cpp(40): warning C4244: '=': conversion from 'unsigned long' to 'float', possible loss of data
-  Fundamentos.vcxproj -> C:\Users\pcsilval\Documents\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\Fundamentos.exe
-  Fundamentos.vcxproj -> C:\Users\pcsilval\Documents\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\Fundamentos.pdb (Partial PDB)
