@@ -12,20 +12,7 @@ void MainGame::run() {
 	update();
 }
 void MainGame::init() {
-
-	SDL_Init(SDL_INIT_EVERYTHING);
-	_window = SDL_CreateWindow("Papu engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _witdh, _height, SDL_WINDOW_OPENGL);
-	if (_window == nullptr) {
-	}
-
-	SDL_GLContext glContext = SDL_GL_CreateContext(_window);
-	
-	GLenum error = glewInit();
-	if (error != GLEW_OK) {
-
-	}
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+	_window.create("Camera2d", _witdh, _height, 0);
 	initShaders();
 }
 
@@ -45,8 +32,14 @@ void MainGame::draw() {
 	_program.use();
 
 	glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, _texture.id);
+	
 
+	GLuint pLocation =_program.getUniformLocation("P");
+	glm::mat4 cameraMatrix = camera2D.getCameraMatrix();
+
+	
+	glUniformMatrix4fv(pLocation, 1, GL_FALSE, 
+							&(cameraMatrix[0][0]));
 	
 	GLuint timeLocation = 
 		_program.getUniformLocation("time");
@@ -62,11 +55,14 @@ void MainGame::draw() {
 		_sprites[i]->draw();
 	}
 	_program.unuse();
-	SDL_GL_SwapWindow(_window);
+	_window.swapWindow();
 }
 
 void MainGame::procesInput() {
 	SDL_Event event;
+	const float CAMERA_SPEED = 20.0f;
+	const float CAMERA_SCALE = 0.1f;
+
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -76,6 +72,43 @@ void MainGame::procesInput() {
 				break;
 			case SDL_MOUSEMOTION:
 			break;
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym) {
+				case SDLK_w:
+					camera2D.setPosition(
+						camera2D.getPosition()
+						- glm::vec2(0.0, CAMERA_SPEED)
+					);
+					break;
+				case SDLK_s:
+					camera2D.setPosition(
+						camera2D.getPosition()
+						+ glm::vec2(0.0, CAMERA_SPEED)
+					);
+					break;
+				case SDLK_a:
+					camera2D.setPosition(
+						camera2D.getPosition()
+						- glm::vec2(CAMERA_SPEED,0.0)
+					);
+					break;
+				case SDLK_d:
+					camera2D.setPosition(
+						camera2D.getPosition()
+						+ glm::vec2(CAMERA_SPEED, 0.0)
+					);
+					break;
+
+				case SDLK_q:
+					camera2D.setScale(
+						camera2D.getScale() + CAMERA_SCALE);
+					break;
+				case SDLK_e:
+					camera2D.setScale(
+						camera2D.getScale() - CAMERA_SCALE);
+					break;
+				}
+				break;
 		}
 	}
 
@@ -84,6 +117,7 @@ void MainGame::procesInput() {
 void MainGame::update() {
 
 	while (_gameState != GameState::EXIT) {
+		camera2D.update();
 		procesInput();
 		draw();
 		
@@ -91,13 +125,12 @@ void MainGame::update() {
 }
 
 
-MainGame::MainGame(): _window(nullptr), 
-					  _witdh(800),
+MainGame::MainGame():  _witdh(800),
 					  _height(600),
 					  _gameState(GameState::PLAY),
 					  _time(0)
 {
-
+	camera2D.init(_witdh, _height);
 }
 
 
