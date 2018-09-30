@@ -15,8 +15,15 @@ void MainGame::run() {
 
 void MainGame::init() {
 	Papu::init();
-	_window.create("Engine", _witdh, _height, 0);
+	_window.create("SpriteBatch", _witdh, _height, 0);
 	initShaders();
+	initLevel();
+	spriteBatch.init();
+}
+
+void MainGame::initLevel() {
+	_currentLevel = 0;
+	_levels.push_back(new Level("Levels/level1.txt"));
 }
 
 void MainGame::initShaders() {
@@ -51,6 +58,25 @@ void MainGame::draw() {
 	GLuint imageLocation = _program.getUniformLocation("myImage");
 	glUniform1i(imageLocation, 0);
 
+	spriteBatch.begin();
+	/*glm::vec4 position(0.0f, 0.0f, 100.0, 100.0f);
+	glm::vec4 uv(0.0f, 0.0, 1.0f, 1.0f);
+
+	static GLTexture texture =
+		ResourceManager::getTexture("Textures/ejemplo.png");
+	Color color;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	color.a = 255;
+	spriteBatch.draw(position, uv, texture.id, 0.0f, color);
+	spriteBatch.draw(position 
+			+ glm::vec4(50.0,0.0,0.0,0.0), 
+			uv, texture.id, 0.0f, color);*/
+	_levels[_currentLevel]->draw();
+
+	spriteBatch.end();
+	spriteBatch.renderBatch();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
