@@ -1,9 +1,6 @@
 #pragma once
 
-namespace FD08 {
+namespace Papu {
 	extern int init();
 }
-
-
-
 

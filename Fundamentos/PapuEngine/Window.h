@@ -1,38 +1,27 @@
 #pragma once
-#include <SDL\SDL.h>;
-#include <gl\glew.h>;
-#include <string>;
+#include <SDL\SDL.h>
+#include <GL\glew.h>
+#include <string>
 
 using namespace std;
-
-enum WindowsFlags {
-	INVISIBLE = 0x1,
-	FULLSCREEN = 0x2,
-	BORDERLES = 0x4
+//1
+//10
+//100
+enum WindowFlags {
+	INVISBLE = 0x1,FULLSCREEN=0x2, BORDERLESS=0x4
 };
-
 
 class Window
 {
 private:
-	SDL_Window *window;
-	int screenWidth;
-	int screenHeigth;
+	SDL_Window *_window;
+	int _screenWidth, _screenHeight;
 public:
 	Window();
 	~Window();
-	void swapWindow();
-	int getScreenWidth() {
-		return screenWidth;
-	}
-
-	int getScreenHeight() {
-		return screenHeigth;
-	}
-	int create(string _windowName,
-		int _screenWidth,
-		int _screenHeight,
-		unsigned int currentFlags
-	);
+	void swapBuffer();
+	int getScreenWidth() { return _screenWidth; };
+	int getScreenHeight() { return _screenHeight; };
+	int create(string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
 };
 

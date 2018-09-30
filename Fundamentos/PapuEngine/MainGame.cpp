@@ -1,18 +1,21 @@
 #include "MainGame.h"
 #include "Sprite.h"
 #include "ImageLoader.h"
+#include <iostream>
+#include "ResourceManager.h"
+#include "PapuEngine.h"
+
+
+using namespace std;
 
 void MainGame::run() {
 	init();
-	_sprites.push_back(new Sprite());
-	_sprites.back()->init(-1, -1, 1, 1, "Textures/Paper_Mario_.png");
-
-	_sprites.push_back(new Sprite());
-	_sprites.back()->init(0, -1, 1, 1, "Textures/Paper_Mario_.png");
 	update();
 }
+
 void MainGame::init() {
-	_window.create("Camera2d", _witdh, _height, 0);
+	Papu::init();
+	_window.create("Engine", _witdh, _height, 0);
 	initShaders();
 }
 
@@ -32,37 +35,33 @@ void MainGame::draw() {
 	_program.use();
 
 	glActiveTexture(GL_TEXTURE0);
-	
+	//glBindTexture(GL_TEXTURE_2D, _texture.id);
 
-	GLuint pLocation =_program.getUniformLocation("P");
-	glm::mat4 cameraMatrix = camera2D.getCameraMatrix();
-
-	
-	glUniformMatrix4fv(pLocation, 1, GL_FALSE, 
-							&(cameraMatrix[0][0]));
-	
-	GLuint timeLocation = 
+	/*GLuint timeLocation = 
 		_program.getUniformLocation("time");
 
-	glUniform1f(timeLocation,_time);
+	glUniform1f(timeLocation,_time);*/
+
+	GLuint pLocation =
+		_program.getUniformLocation("P");
+
+	glm::mat4 cameraMatrix = _camera.getCameraMatrix();
+	glUniformMatrix4fv(pLocation, 1,GL_FALSE, &(cameraMatrix[0][0]));
 
 	GLuint imageLocation = _program.getUniformLocation("myImage");
 	glUniform1i(imageLocation, 0);
-	_time+=0.002;
 
-	for (int i = 0; i < _sprites.size(); i++)
-	{
-		_sprites[i]->draw();
-	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	_program.unuse();
-	_window.swapWindow();
+	_window.swapBuffer();
 }
 
 void MainGame::procesInput() {
 	SDL_Event event;
 	const float CAMERA_SPEED = 20.0f;
-	const float CAMERA_SCALE = 0.1f;
-
+	const float SCALE_SPEED = 0.1f;
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -71,66 +70,65 @@ void MainGame::procesInput() {
 				_gameState = GameState::EXIT;
 				break;
 			case SDL_MOUSEMOTION:
+				_inputManager.setMouseCoords(event.motion.x,event.motion.y);
 			break;
-			case SDL_KEYDOWN:
-				switch (event.key.keysym.sym) {
-				case SDLK_w:
-					camera2D.setPosition(
-						camera2D.getPosition()
-						- glm::vec2(0.0, CAMERA_SPEED)
-					);
-					break;
-				case SDLK_s:
-					camera2D.setPosition(
-						camera2D.getPosition()
-						+ glm::vec2(0.0, CAMERA_SPEED)
-					);
-					break;
-				case SDLK_a:
-					camera2D.setPosition(
-						camera2D.getPosition()
-						- glm::vec2(CAMERA_SPEED,0.0)
-					);
-					break;
-				case SDLK_d:
-					camera2D.setPosition(
-						camera2D.getPosition()
-						+ glm::vec2(CAMERA_SPEED, 0.0)
-					);
-					break;
-
-				case SDLK_q:
-					camera2D.setScale(
-						camera2D.getScale() + CAMERA_SCALE);
-					break;
-				case SDLK_e:
-					camera2D.setScale(
-						camera2D.getScale() - CAMERA_SCALE);
-					break;
-				}
+			case  SDL_KEYUP:
+				_inputManager.releaseKey(event.key.keysym.sym);
+				break;
+			case  SDL_KEYDOWN:
+				_inputManager.pressKey(event.key.keysym.sym);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				_inputManager.pressKey(event.button.button);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				_inputManager.releaseKey(event.button.button);
 				break;
 		}
-	}
 
+		if (_inputManager.isKeyPressed(SDLK_w)) {
+			_camera.setPosition(_camera.getPosition() + glm::vec2(0.0, -CAMERA_SPEED));
+		}
+		if (_inputManager.isKeyPressed(SDLK_s)) {
+			_camera.setPosition(_camera.getPosition() + glm::vec2(0.0, CAMERA_SPEED));
+		}
+		if (_inputManager.isKeyPressed(SDLK_a)) {
+			_camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0));
+		}
+		if (_inputManager.isKeyPressed(SDLK_d)) {
+			_camera.setPosition(_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0));
+		}
+		if (_inputManager.isKeyPressed(SDLK_q)) {
+			_camera.setScale(_camera.getScale() + SCALE_SPEED);
+		}
+		if (_inputManager.isKeyPressed(SDLK_e)) {
+			_camera.setScale(_camera.getScale() - SCALE_SPEED);
+		}
+		if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
+			glm::vec2 mouseCoords =  _camera.convertScreenToWorl(_inputManager.getMouseCoords());
+			cout << mouseCoords.x << " " << mouseCoords.y << endl;
+		}
+	}
 }
 
 void MainGame::update() {
 
 	while (_gameState != GameState::EXIT) {
-		camera2D.update();
 		procesInput();
 		draw();
-		
+		_camera.update();
+		_time += 0.002f;
 	}
 }
 
 
-MainGame::MainGame():  _witdh(800),
+MainGame::MainGame(): 
+					  _witdh(800),
 					  _height(600),
 					  _gameState(GameState::PLAY),
 					  _time(0)
 {
-	camera2D.init(_witdh, _height);
+	_camera.init(_witdh, _height);
 }
 
 

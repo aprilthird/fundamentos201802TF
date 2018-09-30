@@ -1,9 +1,8 @@
 #include <SDL\SDL.h>
 #include "MainGame.h"
-#include "Engine.h";
 
 int main(int argc,char** argv) {
-	FD08::init();
+	SDL_Init(SDL_INIT_EVERYTHING);
 	MainGame mainge;
 	mainge.run();
 	system("PAUSE");

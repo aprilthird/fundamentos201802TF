@@ -3,10 +3,10 @@
 #include <GL\glew.h>
 #include "GLS_Program.h"
 #include "Sprite.h"
-#include "Camera2D.h";
+#include "Window.h"
+#include "Camera2D.h"
 #include <vector>
-#include <iostream>;
-#include "Window.h";
+#include "InputManager.h"
 
 enum class GameState
 {
@@ -23,9 +23,10 @@ private:
 	Window _window;
 	void init();
 	void procesInput();
-	Camera2D camera2D;
 	GLS_Program _program;
 	vector<Sprite*> _sprites;
+	Camera2D _camera;
+	InputManager _inputManager;
 	
 public:
 	MainGame();
