@@ -1,6 +1,7 @@
 #pragma once
 //vectors
 #include <glm\glm.hpp>
+//ortographic world  to normalized
 #include <glm\gtc\matrix_transform.hpp>
 class Camera2D
 {

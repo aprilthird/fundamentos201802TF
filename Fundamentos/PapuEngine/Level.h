@@ -6,26 +6,24 @@
 using namespace std;
 
 const int TILE_WIDTH = 64;
-
 class Level
 {
+
 private:
 	vector<string> _levelData;
 	int _numHumans;
 	void parseLevel();
-	glm::vec2 _playerPosition;
-	vector<glm::vec2> _zombiesPosition;
-
 public:
-	glm::vec2 getPlayerPosition()const {
-		return _playerPosition;
-	}
-
-	vector<glm::vec2> getZombiesPosition() const{
+	glm::vec2 _playerPosition;
+	std::vector<glm::vec2> _zombiesPosition;
+	glm::vec2 getPlayerPosition() const { 
+		return _playerPosition; 
+	};
+	std::vector<glm::vec2> getZombiesPosition()const {
 		return _zombiesPosition;
-	}
+	};
 
-	Level(const std::string& filename);
+	Level(const std::string& fileName);
 	void draw();
 	SpriteBacth _spriteBatch;
 	~Level();

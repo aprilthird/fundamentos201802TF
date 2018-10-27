@@ -2,13 +2,15 @@
 #include <SDL\SDL.h>
 #include <GL\glew.h>
 #include "GLS_Program.h"
-#include "Sprite.h"
 #include "Window.h"
 #include "Camera2D.h"
 #include <vector>
-#include "InputManager.h"
 #include "SpriteBacth.h"
-#include "Level.h";
+#include "InputManager.h"
+#include "Bullet.h"
+#include "Level.h"
+#include "Player.h"
+#include "Human.h"
 
 enum class GameState
 {
@@ -26,13 +28,16 @@ private:
 	void init();
 	void procesInput();
 	GLS_Program _program;
-	vector<Sprite*> _sprites;
-	vector<Level*> _levels;
 	Camera2D _camera;
+	SpriteBacth _spriteBacth;
 	InputManager _inputManager;
-	SpriteBacth spriteBatch;
-	int _currentLevel;
+	vector<Bullet> _bullets;
+	vector<Level*> _levels;
+	vector<Human*>  _humans;
+	Player* _player;
+	int _currenLevel;
 	void initLevel();
+	void updateAgents();
 	
 public:
 	MainGame();

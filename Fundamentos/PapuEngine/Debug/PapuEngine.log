@@ -1,3 +1,41 @@
-﻿  LINK : C:\Users\pcsilval\Documents\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\PapuEngine.exe not found or not built by the last incremental link; performing full link
-  PapuEngine.vcxproj -> C:\Users\pcsilval\Documents\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\PapuEngine.exe
-  PapuEngine.vcxproj -> C:\Users\pcsilval\Documents\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\PapuEngine.pdb (Partial PDB)
+﻿  Zombie.cpp
+  Window.cpp
+  TextureCache.cpp
+  SpriteBacth.cpp
+c:\users\luis\documents\papu-framework\papuengine\spritebacth.cpp(15): warning C4018: '<': signed/unsigned mismatch
+c:\users\luis\documents\papu-framework\papuengine\spritebacth.cpp(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\luis\documents\papu-framework\papuengine\spritebacth.cpp(72): warning C4018: '<': signed/unsigned mismatch
+  Sprite.cpp
+  ResourceManager.cpp
+  Player.cpp
+  picoPNG.cpp
+  PapuEngine.cpp
+  MainGame.cpp
+c:\users\luis\documents\papu-framework\papuengine\maingame.cpp(67): warning C4018: '<': signed/unsigned mismatch
+c:\users\luis\documents\papu-framework\papuengine\maingame.cpp(93): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+c:\users\luis\documents\papu-framework\papuengine\maingame.cpp(163): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  Level.cpp
+c:\users\luis\documents\papu-framework\papuengine\level.cpp(38): warning C4018: '<': signed/unsigned mismatch
+c:\users\luis\documents\papu-framework\papuengine\level.cpp(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\luis\documents\papu-framework\papuengine\level.cpp(64): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\luis\documents\papu-framework\papuengine\level.cpp(65): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  IOManager.cpp
+c:\users\luis\documents\papu-framework\papuengine\iomanager.cpp(15): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+c:\users\luis\documents\papu-framework\papuengine\iomanager.cpp(18): warning C4244: '-=': conversion from 'std::streamoff' to 'int', possible loss of data
+  InputManager.cpp
+  ImageLoader.cpp
+c:\users\luis\documents\papu-framework\papuengine\imageloader.cpp(36): warning C4244: '=': conversion from 'unsigned long' to 'float', possible loss of data
+c:\users\luis\documents\papu-framework\papuengine\imageloader.cpp(37): warning C4244: '=': conversion from 'unsigned long' to 'float', possible loss of data
+  Human.cpp
+  GLS_Program.cpp
+  Error.cpp
+  Camera2D.cpp
+  Bullet.cpp
+  Generating Code...
+  Compiling...
+  Agent.cpp
+  Generating Code...
+  LINK : C:\Users\Luis\Documents\papu-framework\Debug\PapuEngine.exe not found or not built by the last incremental link; performing full link
+  PapuEngine.vcxproj -> C:\Users\Luis\Documents\papu-framework\Debug\PapuEngine.exe
+  PapuEngine.vcxproj -> C:\Users\Luis\Documents\papu-framework\Debug\PapuEngine.pdb (Partial PDB)

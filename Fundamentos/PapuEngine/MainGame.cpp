@@ -1,5 +1,4 @@
 #include "MainGame.h"
-#include "Sprite.h"
 #include "ImageLoader.h"
 #include <iostream>
 #include "ResourceManager.h"
@@ -15,15 +14,19 @@ void MainGame::run() {
 
 void MainGame::init() {
 	Papu::init();
-	_window.create("SpriteBatch", _witdh, _height, 0);
-	initShaders();
+	_window.create("Engine", _witdh, _height, 0);
+	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 	initLevel();
-	spriteBatch.init();
+	initShaders();
 }
 
 void MainGame::initLevel() {
-	_currentLevel = 0;
 	_levels.push_back(new Level("Levels/level1.txt"));
+	_player = new Player();
+	_currenLevel = 0;
+	_player->init(1.0f, _levels[_currenLevel]->getPlayerPosition(), &_inputManager);
+	_humans.push_back(_player);
+	_spriteBacth.init();
 }
 
 void MainGame::initShaders() {
@@ -58,25 +61,16 @@ void MainGame::draw() {
 	GLuint imageLocation = _program.getUniformLocation("myImage");
 	glUniform1i(imageLocation, 0);
 
-	spriteBatch.begin();
-	/*glm::vec4 position(0.0f, 0.0f, 100.0, 100.0f);
-	glm::vec4 uv(0.0f, 0.0, 1.0f, 1.0f);
+	_spriteBacth.begin();
+	_levels[_currenLevel]->draw();
 
-	static GLTexture texture =
-		ResourceManager::getTexture("Textures/ejemplo.png");
-	Color color;
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	color.a = 255;
-	spriteBatch.draw(position, uv, texture.id, 0.0f, color);
-	spriteBatch.draw(position 
-			+ glm::vec4(50.0,0.0,0.0,0.0), 
-			uv, texture.id, 0.0f, color);*/
-	_levels[_currentLevel]->draw();
+	for (int i = 0; i < _humans.size(); i++)
+	{
+		_humans[i]->draw(_spriteBacth);
+	}
 
-	spriteBatch.end();
-	spriteBatch.renderBatch();
+	_spriteBacth.end();
+	_spriteBacth.renderBatch();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -112,18 +106,18 @@ void MainGame::procesInput() {
 				break;
 		}
 
-		if (_inputManager.isKeyPressed(SDLK_w)) {
-			_camera.setPosition(_camera.getPosition() + glm::vec2(0.0, -CAMERA_SPEED));
-		}
-		if (_inputManager.isKeyPressed(SDLK_s)) {
+		/*if (_inputManager.isKeyPressed(SDLK_w)) {
 			_camera.setPosition(_camera.getPosition() + glm::vec2(0.0, CAMERA_SPEED));
 		}
-		if (_inputManager.isKeyPressed(SDLK_a)) {
-			_camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0));
+		if (_inputManager.isKeyPressed(SDLK_s)) {
+			_camera.setPosition(_camera.getPosition() + glm::vec2(0.0, -CAMERA_SPEED));
 		}
-		if (_inputManager.isKeyPressed(SDLK_d)) {
+		if (_inputManager.isKeyPressed(SDLK_a)) {
 			_camera.setPosition(_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0));
 		}
+		if (_inputManager.isKeyPressed(SDLK_d)) {
+			_camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0));
+		}*/
 		if (_inputManager.isKeyPressed(SDLK_q)) {
 			_camera.setScale(_camera.getScale() + SCALE_SPEED);
 		}
@@ -133,6 +127,12 @@ void MainGame::procesInput() {
 		if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
 			glm::vec2 mouseCoords =  _camera.convertScreenToWorl(_inputManager.getMouseCoords());
 			cout << mouseCoords.x << " " << mouseCoords.y << endl;
+
+			glm::vec2 playerPosition(0, 0);
+
+			glm::vec2 direction = mouseCoords - playerPosition;
+			direction = glm::normalize(direction);
+			_bullets.emplace_back(playerPosition, direction, 1.0f,1000);
 		}
 	}
 }
@@ -144,15 +144,34 @@ void MainGame::update() {
 		draw();
 		_camera.update();
 		_time += 0.002f;
+		/*for (int i = 0; i < _bullets.size();)
+		{
+			if(_bullets[i].update()){
+				_bullets[i] = _bullets.back();
+				_bullets.pop_back();
+			}
+			else {
+				i++;
+			}
+		}*/
+		updateAgents();
+		_camera.setPosition(_player->getPosition());
 	}
 }
 
+void MainGame::updateAgents() {
+	for (int i = 0; i < _humans.size(); i++)
+	{
+		_humans[i]->update();
+	}
+}
 
 MainGame::MainGame(): 
 					  _witdh(800),
 					  _height(600),
 					  _gameState(GameState::PLAY),
-					  _time(0)
+					  _time(0),
+					  _player(nullptr)
 {
 	_camera.init(_witdh, _height);
 }
