@@ -23,6 +23,22 @@ public:
 		return _zombiesPosition;
 	};
 
+	int getNumHumans() const{
+		return _numHumans;
+	};
+
+	int getWidth() const {
+		return _levelData[0].size();
+	};
+
+	int getHeight() const {
+		return _levelData[0].size();
+	};
+
+	std::vector<string> getLevelData() const{
+		return _levelData;
+	};
+
 	Level(const std::string& fileName);
 	void draw();
 	SpriteBacth _spriteBatch;

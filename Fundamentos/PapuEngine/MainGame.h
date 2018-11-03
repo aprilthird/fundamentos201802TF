@@ -11,6 +11,7 @@
 #include "Level.h"
 #include "Player.h"
 #include "Human.h"
+#include "Zombie.h"
 
 enum class GameState
 {
@@ -33,6 +34,7 @@ private:
 	InputManager _inputManager;
 	vector<Bullet> _bullets;
 	vector<Level*> _levels;
+	vector<Zombie*> _zombies;
 	vector<Human*>  _humans;
 	Player* _player;
 	int _currenLevel;
