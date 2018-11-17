@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{e252ca2b-33f5-4cc4-b2c4-33a34e4aad4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen">
+      <UniqueIdentifier>{ebb14003-6a2e-4587-b066-9e538ff5ab7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameScreen.h">
+      <Filter>Header Files\Screen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
