@@ -28,6 +28,9 @@
     <Filter Include="Header Files\Screen">
       <UniqueIdentifier>{ebb14003-6a2e-4587-b066-9e538ff5ab7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Screen">
+      <UniqueIdentifier>{80e4095b-33ee-40df-874a-043a1c23312c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenList.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +171,12 @@
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="IGameScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenList.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
   </ItemGroup>
