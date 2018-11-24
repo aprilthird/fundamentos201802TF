@@ -2,21 +2,19 @@
 #include "IGameScreen.h"
 
 
-ScreenList::ScreenList(Game* game): _game(game)
+ScreenList::ScreenList(Game* game):_game(game)
 {
 }
 
 void ScreenList::setScreen(int nextScreen) {
 	_currentIndex = nextScreen;
 }
-
 void ScreenList::addScreen(IGameScreen* newScreen) {
 	newScreen->_screenIndex = _screens.size();
 	_screens.push_back(newScreen);
 	newScreen->build();
 	newScreen->setParent(_game);
 }
-
 void ScreenList::destroy() {
 	for (size_t i = 0; i < _screens.size(); i++)
 	{
@@ -25,6 +23,7 @@ void ScreenList::destroy() {
 	_currentIndex = -1;
 	_screens.resize(0);
 }
+
 
 ScreenList::~ScreenList()
 {
@@ -41,8 +40,8 @@ IGameScreen* ScreenList::getCurrent() {
 IGameScreen* ScreenList::moveNext() {
 	IGameScreen* currentScreen = getCurrent();
 	if (currentScreen->getNextScreen() != -1) {
-		_currentIndex 
-			= currentScreen->getNextScreen();
+		_currentIndex = 
+			currentScreen->getNextScreen();
 	}
 	return getCurrent();
 }
@@ -50,8 +49,8 @@ IGameScreen* ScreenList::moveNext() {
 IGameScreen* ScreenList::movePrevious() {
 	IGameScreen* currentScreen = getCurrent();
 	if (currentScreen->getPreviousScreen() != -1) {
-		_currentIndex
-			= currentScreen->getPreviousScreen();
+		_currentIndex =
+			currentScreen->getPreviousScreen();
 	}
 	return getCurrent();
 }

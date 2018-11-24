@@ -14,7 +14,7 @@ public:
 	void addScreen(IGameScreen* newScreen);
 	void destroy();
 	IGameScreen* getCurrent();
-protected: 
+protected:
 	std::vector<IGameScreen*> _screens;
 	Game* _game;
 	int _currentIndex = -1;
