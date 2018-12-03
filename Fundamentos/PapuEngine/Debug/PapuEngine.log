@@ -1,7 +1,13 @@
-﻿  EndScreen.cpp
-c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\button.h(3): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\button.h(4): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\button.h(5): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\endscreen.cpp(46): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\endscreen.cpp(45): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+﻿  Helpers.cpp
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\helpers.cpp(10): warning C4018: '<': no coinciden signed/unsigned
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\helpers.cpp(24): warning C4018: '<': no coinciden signed/unsigned
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\helpers.cpp(25): warning C4244: 'argumento': conversión de 'float' a 'const _Ty'; posible pérdida de datos
+          with
+          [
+              _Ty=int
+          ]
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\helpers.cpp(34): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\helpers.cpp(36): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\helpers.cpp(43): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\helpers.cpp(52): warning C4018: '<': no coinciden signed/unsigned
   PapuEngine.vcxproj -> C:\Users\user\source\repos\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\PapuEngine.exe

@@ -130,7 +130,9 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GeneticAlgorithm.cpp" />
     <ClCompile Include="GLS_Program.cpp" />
+    <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IOManager.cpp" />
@@ -164,8 +166,10 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GeneticAlgorithm.h" />
     <ClInclude Include="GLS_Program.h" />
     <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="Helpers.h" />
     <ClInclude Include="IGameScreen.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h" />

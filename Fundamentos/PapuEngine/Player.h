@@ -3,7 +3,7 @@
 #include "InputManager.h"
 
 const float PLAYER_SPEED = 8.0f;
-const float PLAYER_LIFE = 10;
+const float PLAYER_LIFE = 200;
 
 class Player : public Agent
 {

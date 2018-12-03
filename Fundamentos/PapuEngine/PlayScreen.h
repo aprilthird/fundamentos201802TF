@@ -27,6 +27,7 @@ private:
 	Player* _jugador;
 	std::vector<PlayerBullet*> _playerBullets;
 	std::vector<Alien*> _aliens;
+	std::vector<Alien*> _prevAliens;
 	std::vector<AlienBullet*> _alienBullets;
 	clock_t _beginTime;
 	clock_t _endTime;

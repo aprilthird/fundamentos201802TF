@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Game\Screens">
       <UniqueIdentifier>{147cb6c6-a7f1-47ca-95e1-ed2fc597a022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Algorithm">
+      <UniqueIdentifier>{18de4030-d7d3-482c-8a39-68100720d581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Algorithm">
+      <UniqueIdentifier>{0316b0d1-caa1-4efb-bb0f-07d6f2109733}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PapuEngine.cpp">
@@ -120,9 +126,6 @@
     <ClCompile Include="Agent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Timing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -164,6 +167,15 @@
     </ClCompile>
     <ClCompile Include="AlienBullet.cpp">
       <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers.cpp">
+      <Filter>Source Files\Game\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneticAlgorithm.cpp">
+      <Filter>Source Files\Game\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Timing.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +283,12 @@
     </ClInclude>
     <ClInclude Include="AlienBullet.h">
       <Filter>Header Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneticAlgorithm.h">
+      <Filter>Header Files\Game\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers.h">
+      <Filter>Header Files\Game\Algorithm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

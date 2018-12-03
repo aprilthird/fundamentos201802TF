@@ -56,7 +56,7 @@ void Alien::draw(SpriteBacth& spriteBatch) {
 		spriteBatch.draw(drCanon, uvRect, canonTextureId, 0.0f, color);
 	}
 
-	if (_shieldType != SHIELD::NONE) {
+	if (_shieldType != SHIELD::NONE && _shieldDuration > 0) {
 		glm::vec4 destRectShield(_position.x - 10, _position.y + 10, _agent_width + 20, _agent_height + 20);
 		spriteBatch.draw(destRectShield, uvRect, shieldTextureId, 0.0f, SHIELD::VALUES[_shieldType]->color);
 	}

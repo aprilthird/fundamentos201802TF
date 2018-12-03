@@ -2,7 +2,10 @@
 #include "Game.h"
 #include "MyScreens.h"
 #include "Constants.h"
+#include "GeneticAlgorithm.h"
+#include "Helpers.h"
 #include <time.h>
+#include <bitset>
 
 PlayScreen::PlayScreen(Window* window):_window(window)
 {
@@ -109,7 +112,7 @@ void PlayScreen::update() {
 				if (_aliens[i]->damaged(300)) {
 					Alien* a = _aliens[i];
 					_aliens.erase(_aliens.begin() + i);
-					delete a;
+					_prevAliens.push_back(a);
 					_points += 200;
 				}
 				PlayerBullet* pb = _playerBullets[j];
@@ -117,6 +120,11 @@ void PlayScreen::update() {
 				delete pb;
 			}
 		}
+	}
+	if (_aliens.size() <= 0) {
+		_roundNumber++;
+		initRound();
+		_points += 1000;
 	}
 	checkInput();
 	if (_game->_inputManager.isKeyDown(SDLK_SPACE) && !_shoot) {
@@ -142,7 +150,7 @@ void PlayScreen::initRound() {
 		&_game->_inputManager, 3);
 	_beginTime = clock();
 	if (_roundNumber == 1) {
-		for (int i = 0; i < 12; ++i) {
+		for (int i = 0; i < 6; ++i) {
 			float x = rand() % (_window->getScreenWidth() - 61);
 			int row = rand() % 3;
 			float y = row * 80;
@@ -150,6 +158,17 @@ void PlayScreen::initRound() {
 				glm::vec2(x + 1, _window->getScreenHeight() - y - 80), rand() % 4, rand() % 4,
 				rand() % 4, rand() % 4, rand() % 4, 3));
 		}
+	}
+	else {
+		std::vector<std::bitset<NBITS>> values = Helpers::values(_prevAliens);
+		std::vector<int> fitness = Helpers::fitness(_prevAliens);
+		std::vector<std::bitset<NBITS>> newValues = GeneticAlgorithm::deleteWorst(values, fitness);
+		newValues = GeneticAlgorithm::makePairs(values);
+		newValues = GeneticAlgorithm::crossover(values);
+		newValues = GeneticAlgorithm::mutation(values);
+		_aliens.clear();
+		_aliens = Helpers::generateAliens(values, 6, 60, 80, 
+			_window->getScreenWidth(), _window->getScreenHeight());
 	}
 }
 
@@ -197,11 +216,15 @@ void PlayScreen::drawHUD() {
 	);
 	std::string pointsMessage = "PUNTAJE: " + std::to_string(_points);
 	sprintf_s(buffer, pointsMessage.c_str());
-	_spriteFont->draw(_hudBach, buffer, glm::vec2(_window->getScreenWidth() - 150, 0),
+	_spriteFont->draw(_hudBach, buffer, glm::vec2(_window->getScreenWidth() - 180, 0),
 		glm::vec2(0.5), 0.0f, ColorRGBA(255, 255, 0, 255));
 	std::string lifeMessage = "VIDA: " + std::to_string((int)_jugador->getLife());
 	sprintf_s(buffer, lifeMessage.c_str());
 	_spriteFont->draw(_hudBach, buffer, glm::vec2(_window->getScreenWidth() / 2 - 50, 0),
+		glm::vec2(0.5), 0.0f, ColorRGBA(255, 255, 0, 255));
+	std::string roundsMessage = "RONDA: " + std::to_string(_roundNumber);
+	sprintf_s(buffer, roundsMessage.c_str());
+	_spriteFont->draw(_hudBach, buffer, glm::vec2(0, _window->getScreenHeight() - 100),
 		glm::vec2(0.5), 0.0f, ColorRGBA(255, 255, 0, 255));
 	_hudBach.end();
 	_hudBach.renderBatch();
