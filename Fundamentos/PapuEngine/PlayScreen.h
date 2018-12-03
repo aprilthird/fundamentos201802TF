@@ -7,7 +7,11 @@
 #include "Background.h"
 #include "GLTexture.h"
 #include "SpriteFont.h"
-#include "Jugador.h"
+#include "Player.h"
+#include "PlayerBullet.h"
+#include "Alien.h"
+#include "AlienBullet.h"
+#include <ctime>
 
 class PlayScreen: public IGameScreen
 {
@@ -20,7 +24,19 @@ private:
 	SpriteBacth _hudBach;
 	Camera2D _hudCamera;
 	SpriteFont* _spriteFont;
-	Jugador* _jugador;
+	Player* _jugador;
+	std::vector<PlayerBullet*> _playerBullets;
+	std::vector<Alien*> _aliens;
+	std::vector<AlienBullet*> _alienBullets;
+	clock_t _beginTime;
+	clock_t _endTime;
+	int _roundNumber;
+	long int _prevAnimatedD;
+	long int _ellapsedTimeD;
+	long int _ellapsedTimeI;
+	long int _prevShootTime;
+	bool _gameOver = false;
+	bool _shoot;
 	void drawHUD();
 public:
 	PlayScreen(Window* window);
@@ -35,6 +51,7 @@ public:
 	virtual int getNextScreen() const override;
 	virtual int getPreviousScreen() const override;
 	virtual void checkInput() override;
+	void initRound();
 	~PlayScreen();
 };
 

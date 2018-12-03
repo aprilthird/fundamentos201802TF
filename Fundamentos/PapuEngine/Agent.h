@@ -15,6 +15,8 @@ class Agent
 protected:
 	glm::vec2 _position;
 	std::string _texturePath;
+	int _spriteNumber;
+	int _maxSpriteNumber;
 	float _agent_width;
 	float _agent_height;
 	int _texture_id;
@@ -27,15 +29,24 @@ protected:
 	void collideWithTile(glm::vec2 tilePos);
 
 public:
-	Agent(float agent_width,float agent_height,glm::vec2 position, std::string texturePath);
+	Agent(float agent_width, float agent_height, glm::vec2 position, int maxSpriteNumber = 0);
+	Agent(float agent_width,float agent_height,glm::vec2 position, std::string texturePath, int maxSpriteNumber = 0);
+
 	glm::vec2 getPosition()const { return _position; };
 
 	virtual void update(float deltaTime, bool reloj) = 0;
+	void animate();
 	virtual void changeTexture(std::string texturePath) = 0;
 	virtual std::string getTexture() = 0;
 	void draw(SpriteBacth& spritebatch);
 	bool collideWithLevel(const std::vector<std::string>& levelData);
 	virtual ~Agent();
 	bool collideWithAgent(Agent* agent);
+	float getWidth() const {
+		return _agent_width;
+	}
+	float getHeight() const {
+		return _agent_height;
+	}
 };
 

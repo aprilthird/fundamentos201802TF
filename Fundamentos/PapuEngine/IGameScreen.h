@@ -14,6 +14,7 @@ protected:
 	ScreenState _currentState = ScreenState::NONE;
 	Game* _game = nullptr;
 public:
+	int _points;
 	friend class ScreenList;
 	virtual void checkInput() = 0;
 	virtual void initSystem() = 0;

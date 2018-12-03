@@ -10,14 +10,17 @@ private:
 	std::string _texture;
 	int _textureID;
 	glm::vec2 _position;
+	std::string _text;
 public:
-	void draw(
-			SpriteBacth& spriteBatch);
-	Button(std::string texture);
+	Button(std::string texture, glm::vec2 position, std::string text);
+	void draw(SpriteBacth& spriteBatch);
 	bool clicked(glm::vec2 position);
 	void setPosition(glm::vec2 position);
 	glm::vec2 getPosition() const {
 		return _position;
+	}
+	std::string getText() const {
+		return _text;
 	}
 	~Button();
 };

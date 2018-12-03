@@ -36,7 +36,7 @@ void Game::draw() {
 	}
 }
 bool Game::initSystems() {
-	_window.create("Plataformer", 760, 500, 0);
+	_window.create("Genetic Space Invaders TF", 760, 500, 0);
 	return true;
 }
 
@@ -96,19 +96,22 @@ void Game::update() {
 			case ScreenState::RUNNING:
 				_currentScreen->update();
 				break;
-			case ScreenState::CHANGE_NEXT:
+			case ScreenState::CHANGE_NEXT: {
 				_currentScreen->onExit();
 				_currentScreen = _screenList->getCurrent();
 				index = _currentScreen->getIndex();
+				float points = _currentScreen->_points;
 				_screenList->destroy();
 				addScreens();
 				setScreen(index);
 				_currentScreen = _screenList->moveNext();
 				if (_currentScreen) {
+					_currentScreen->_points = points;
 					_currentScreen->setRunning();
 					_currentScreen->onEntry();
 				}
 				break;
+			}
 			case ScreenState::CHANGE_PREVIOUS:
 				_currentScreen->onExit();
 				_currentScreen = _screenList->getCurrent();

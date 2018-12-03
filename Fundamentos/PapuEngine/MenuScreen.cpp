@@ -1,7 +1,7 @@
 #include "MenuScreen.h"
 #include "MyScreens.h"
 #include "Game.h"
-
+#include "Constants.h"
 
 MenuScreen::MenuScreen(Window* window):
 	_window(window), btnGameClicked(false)
@@ -10,8 +10,10 @@ MenuScreen::MenuScreen(Window* window):
 }
 
 void MenuScreen::initGUI() {
-	_spriteFont = new SpriteFont("Fonts/arial.ttf", 64);
-	_button = new Button("Textures/menu_button.png");
+	_spriteFont = new SpriteFont(PATH::FONTS::BITS8.c_str(), 64);
+	_button = new Button("Textures/menu_button.png",
+		glm::vec2(_window->getScreenWidth() / 2.0f - 50, 0),
+		"JUGAR!");
 }
 
 void MenuScreen::initSystem() {
@@ -38,7 +40,9 @@ void MenuScreen::onEntry() {
 		_window->getScreenWidth() / 2.0f,
 		_window->getScreenHeight() / 2.0f));
 	_spriteBatch.init();
-	_background = new Background("Textures/game.png");
+	_background = new Background(PATH::BACKGROUNDS::MENU, 
+		_window->getScreenWidth(), 
+		_window->getScreenHeight());
 	initGUI();
 }
 
@@ -82,10 +86,21 @@ void MenuScreen::draw() {
 
 	char buffer[256];
 	_spriteBatch.begin();
-	sprintf(buffer, " HOLA MI JUEGO");
+	sprintf(buffer, "GENETIC SPACE INVADERS");
 	_spriteFont->draw(_spriteBatch, buffer,
-		glm::vec2(250, 100), glm::vec2(0.5), 0.0f,
+		glm::vec2(80, _window->getScreenHeight() / 2.0f), 
+		glm::vec2(1.0), 0.0f,
 		ColorRGBA(255, 255, 255, 255));
+	sprintf(buffer, "Trabajo Final");
+	_spriteFont->draw(_spriteBatch, buffer,
+		glm::vec2(_window->getScreenWidth() / 2.0f - 50, _window->getScreenHeight() / 2.0f - 60),
+		glm::vec2(0.5), 0.0f,
+		ColorRGBA(255, 255, 255, 255));
+	sprintf(buffer, _button->getText().c_str());
+	_spriteFont->draw(_spriteBatch, buffer,
+		glm::vec2(_button->getPosition().x + 70, _button->getPosition().y + 15),
+		glm::vec2(0.5), 0.0f,
+		ColorRGBA(0, 0, 0, 255));
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
 

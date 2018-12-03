@@ -2,14 +2,31 @@
 #include "ResourceManager.h"
 #include <algorithm>
 
-Agent::Agent(float agent_width, float agent_height, glm::vec2 position, std::string texture):
+Agent::Agent(float agent_width, float agent_height, glm::vec2 position, int maxSpriteNumber) :
+	_agent_width(agent_width), _agent_height(agent_height),
+	_agent_radius(agent_width / 2),
+	_position(position),
+	_maxSpriteNumber(maxSpriteNumber)
+{
+	_spriteNumber = 0;
+}
+
+Agent::Agent(float agent_width, float agent_height, glm::vec2 position, std::string texture, int maxSpriteNumber):
 	_agent_width(agent_width), _agent_height(agent_height), 
 	_agent_radius(agent_width/2),
 	_position(position),
-	_texturePath(texture)
+	_texturePath(texture),
+	_maxSpriteNumber(maxSpriteNumber)
 {
+	_spriteNumber = 0;
 }
 
+void Agent::animate() {
+	if (_spriteNumber < _maxSpriteNumber)
+		_spriteNumber++;
+	else
+		_spriteNumber = 0;
+}
 
 void Agent::draw(SpriteBacth& spritebatch) {
 	_texture_id = ResourceManager::getTexture(_texturePath).id;
@@ -18,7 +35,6 @@ void Agent::draw(SpriteBacth& spritebatch) {
 	color.set(255, 255, 255, 255);
 	glm::vec4 destRect(_position.x, _position.y, _agent_width, _agent_height);
 	spritebatch.draw(destRect, uvRect, _texture_id, 0.0f, color);
-
 }
 
 bool Agent::collideWithLevel(const std::vector<std::string>& levelData) {

@@ -1,3 +1,7 @@
-﻿  PlayScreen.cpp
-  PapuEngine.vcxproj -> C:\Users\pcsilval\Documents\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\PapuEngine.exe
-  PapuEngine.vcxproj -> C:\Users\pcsilval\Documents\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\PapuEngine.pdb (Partial PDB)
+﻿  EndScreen.cpp
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\button.h(3): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\button.h(4): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\button.h(5): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\endscreen.cpp(46): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\user\source\repos\fundamentos-teoria-de-juegos201802\fundamentos\papuengine\endscreen.cpp(45): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  PapuEngine.vcxproj -> C:\Users\user\source\repos\fundamentos-teoria-de-juegos201802\Fundamentos\Debug\PapuEngine.exe

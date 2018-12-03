@@ -4,9 +4,9 @@
 #include <iostream>
 
 
-Button::Button(std::string texture): _texture(texture)
+Button::Button(std::string texture, glm::vec2 position, std::string text) : 
+	_texture(texture), _position(position), _text(text)
 {
-	_position = glm::vec2(400, 300);
 	_textureID = ResourceManager::getTexture(texture).id;
 }
 
